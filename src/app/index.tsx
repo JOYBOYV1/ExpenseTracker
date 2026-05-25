@@ -1,9 +1,10 @@
-import { Text, View } from "react-native";
+import { Redirect, Stack } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
     return (
-        <View>
-            <Text>Welcome to the Expense Tracker App!</Text>
-        </View>
-    );
+        <SafeAreaView>
+            <Redirect href="/auth/loginScreen" />
+        </SafeAreaView>
+    )
 };
