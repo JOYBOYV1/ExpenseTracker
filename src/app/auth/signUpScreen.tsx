@@ -4,6 +4,7 @@ import { Alert, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, Tou
 import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter, useNavigation } from 'expo-router';
+import { API_BASE_URL } from '../../components/const';
 
 const SignUpScreen = () => {
     const router = useRouter();
@@ -29,7 +30,7 @@ const SignUpScreen = () => {
         }
 
         try {
-            const response = await axios.post("http://10.211.237.125:3001/user/Create", SignUpData);
+            const response = await axios.post(`${API_BASE_URL}user/Create`, SignUpData);
             if (response.status === 200 || response.status === 201) {
                 Alert.alert("Success", "Account created successfully.");
                 router.push("/auth/loginScreen");
@@ -91,6 +92,7 @@ const SignUpScreen = () => {
                                     autoCapitalize="none"
                                     keyboardType="phone-pad"
                                     value={SignUpData.phoneNumber}
+                                    maxLength={10}
                                     onChangeText={(text) =>
                                         setSignUpData({ ...SignUpData, phoneNumber: text })
                                     } />
@@ -111,10 +113,10 @@ const SignUpScreen = () => {
                                         style={{ position: "absolute", right: 12, height: "100%", justifyContent: "center" }}
                                         onPress={() => setShowPassword(!showPassword)}
                                     >
-                                        <MaterialCommunityIcons 
-                                            name={showPassword ? "eye-off-outline" : "eye-outline"} 
-                                            size={20} 
-                                            color="#1c5679" 
+                                        <MaterialCommunityIcons
+                                            name={showPassword ? "eye-off-outline" : "eye-outline"}
+                                            size={20}
+                                            color="#1c5679"
                                         />
                                     </TouchableOpacity>
                                 </View>
